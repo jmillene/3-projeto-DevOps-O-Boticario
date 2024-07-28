@@ -12,9 +12,11 @@ spec:
       labels:
         app: product-service
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
       - name: product-service
-        image: jessica123/product-service:latest
+        image: jessica/product-service:latest
         ports:
         - containerPort: 80
         resources:
