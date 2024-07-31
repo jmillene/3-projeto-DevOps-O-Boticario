@@ -1,17 +1,11 @@
-# Usa a imagem base do Nginx
+# Utiliza a imagem base do Nginx
 FROM nginx:alpine
 
-# Remove a configuração padrão do Nginx
-RUN rm /etc/nginx/conf.d/default.conf
+# Define o diretório de trabalho dentro do container
+WORKDIR /usr/share/nginx/html
 
-# Copia a configuração personalizada do Nginx
-COPY ../confi.d/default.config /etc/nginx/conf.d/default.conf
+# Copia os arquivos estáticos para o diretório de trabalho
+COPY ./dist .
 
-# Copia os arquivos estáticos para a pasta correta
-COPY dist /usr/share/nginx/html
-
-# Exponhe a porta 80
+# Expõe a porta 80 para acesso ao serviço
 EXPOSE 80
-
-# Inicia o Nginx
-CMD ["nginx", "-g", "daemon off;"]
